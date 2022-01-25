@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+    <style>
+        #clock{
+            position: relative;
+            background: url(clock.png) no-repeat;
+            width: 960px;
+            height: 960px;
+        }
+
+        #clock >#hh,#mh,#sh{
+            position: absolute;
+            transform-origin: bottom;
+            background: #000000;
+            border-radius: 7px;
+            opacity: 1;
+        }
+        #clock >#hh {
+            width: 12px;
+            height: 200px;
+            top: 283px;
+            left: 473px;
+        }
+        #clock >#mh {
+            width: 6px;
+            height: 230px;
+            top: 253px;
+            left: 476px;
+        }
+
+        #clock >#sh {
+            width: 2px;
+            height: 240px;
+            top: 244px;
+            left: 478px;
+            opacity: .3;
+        }
+    </style>
+    <script>
+        var d,h,m,s,hdeg,ampm;
+        function adjustClock(){
+            d = new Date();
+            h = d.getHours();
+            m = d.getMinutes();
+            s = d.getSeconds();
+            hdeg = h*30 + m/2;
+            if(h>=12){
+                ampm="PM";
+            }else{
+                ampm="AM";
+            }
+            hh.style.transform = "rotate("+hdeg+"deg)";
+            mh.style.transform = "rotate("+m*6+"deg)";
+            sh.style.transform = "rotate("+s*6+"deg)";
+            meridiem.innerHTML = ampm;
+        }
+        window.addEventListener("load",function(){ 
+            setInterval(adjustClock,1000);
+        }); 
+    </script>
+<body>
+<div id="clock">
+    <div id="hh"></div>
+    <div id="mh"></div>
+    <div id="sh"></div>
+    <div id="meridiem"></div>
+</div>
+
+    
+</body>
+</html>
